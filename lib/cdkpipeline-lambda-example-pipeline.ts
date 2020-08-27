@@ -2,6 +2,7 @@ import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
 import * as cdk from '@aws-cdk/core';
 import * as pipelines from "@aws-cdk/pipelines";
+import { CdkpipelineLambdaExampleStage } from './cdkpipeline-lambda-example-stage';
 
 export class CdkpipelineLambdaExamplePipeline extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -26,9 +27,14 @@ export class CdkpipelineLambdaExamplePipeline extends cdk.Stack {
       synthAction: pipelines.SimpleSynthAction.standardNpmSynth({
         sourceArtifact,
         cloudAssemblyArtifact,
-        buildCommand: 'npm run build'
+        buildCommand: 'npm run build',
+        environment: {
+          privileged: true
+        }
       }),
     });
+
+    pipeline.addApplicationStage(new CdkpipelineLambdaExampleStage(this, 'prod'))
 
   }
 }

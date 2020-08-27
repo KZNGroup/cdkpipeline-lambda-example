@@ -6,7 +6,7 @@ import { CdkpipelineLambdaExamplePipeline } from '../lib/cdkpipeline-lambda-exam
 
 const app = new cdk.App();
 
-new CdkpipelineLambdaExampleStack(app, 'CdkpipelineLambdaExampleStack');
+new CdkpipelineLambdaExampleStack(app, 'cdkpipeline-lambda-example-stack');
 
 new CdkpipelineLambdaExamplePipeline(app, 'cdkpipeline-lambda-example-pipeline');
 
